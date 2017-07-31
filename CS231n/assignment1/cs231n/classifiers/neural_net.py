@@ -76,12 +76,9 @@ class TwoLayerNet(object):
     # Store the result in the scores variable, which should be an array of      #
     # shape (N, C).                                                             #
     #############################################################################
-    H, C = W1.shape[1], W2.shape[1]
-    out1, out2 = None, None
-    out1 = np.hstack((X,np.ones((N,1)).reshape(N,1))).dot(np.vstack((W1,b1.reshape(1,H)))) 
-    out2 = out1 * (out1 > 0) # ReLU
-    out2 = np.hstack((out2,np.ones((N,1)).reshape(N,1))).dot(np.vstack((W2,b2.reshape(1,C)))) # (N,C)
-    scores = out2
+    out1 = X.dot(W1) + b1
+    out2 = np.maximum(out1, 0) # ReLU
+    scores = out2.dot(W2) + b2
     #############################################################################
     #                              END OF YOUR CODE                             #
     #############################################################################
@@ -125,14 +122,14 @@ class TwoLayerNet(object):
     dz = np.dot(dout, W2.T) * (out1 > 0)  # (N, H)
     
     # compute gradient for parameters
-    grads['W2'] = np.dot(out1.T, dout) / N      # (H, C)
+    grads['W2'] = np.dot(out2.T, dout) / N      # (H, C)
     grads['b2'] = np.sum(dout, axis=0) / N      # (C,)
     grads['W1'] = np.dot(X.T, dz) / N        # (D, H)
     grads['b1'] = np.sum(dz, axis=0) / N       # (H,)
     
     # add reg term
-    grads['W2'] += reg * W2
-    grads['W1'] += reg * W1
+    grads['W2'] += 2 * reg * W2
+    grads['W1'] += 2 * reg * W1
     
     #############################################################################
     #                              END OF YOUR CODE                             #
