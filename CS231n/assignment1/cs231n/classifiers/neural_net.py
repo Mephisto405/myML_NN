@@ -40,6 +40,9 @@ class TwoLayerNet(object):
     self.params['b1'] = np.zeros(hidden_size)
     self.params['W2'] = std * np.random.randn(hidden_size, output_size)
     self.params['b2'] = np.zeros(output_size)
+    
+    self.W1_test = self.params['W1']
+    self.W2_test = self.params['W2']
 
   def loss(self, X, y=None, reg=0.0):
     """
@@ -195,6 +198,9 @@ class TwoLayerNet(object):
       self.params['b1'] -= learning_rate * grads['b1']
       self.params['W2'] -= learning_rate * grads['W2']
       self.params['b2'] -= learning_rate * grads['b2']
+    
+      self.W1_test = 0.999 * self.W1_test + 0.001 * self.params['W1']
+      self.W2_test = 0.999 * self.W2_test + 0.001 * self.params['W2']
       #########################################################################
       #                             END OF YOUR CODE                          #
       #########################################################################
@@ -240,7 +246,7 @@ class TwoLayerNet(object):
     # TODO: Implement this function; it should be VERY simple!                #
     ###########################################################################
     N, D = X.shape
-    W1,W2,b1,b2 = self.params['W1'], self.params['W2'], self.params['b1'], self.params['b2']
+    W1,W2,b1,b2 = self.W1_test, self.W2_test, self.params['b1'], self.params['b2']
     H, C = W1.shape[1], W2.shape[1]
     
     out1 = np.hstack((X,np.ones((N,1)).reshape(N,1))).dot(np.vstack((W1,b1.reshape(1,H)))) 
