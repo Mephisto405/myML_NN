@@ -143,7 +143,7 @@ class TwoLayerNet(object):
   def train(self, X, y, X_val, y_val,
             learning_rate=1e-3, learning_rate_decay=0.95,
             reg=5e-6, num_iters=100,
-            batch_size=200, verbose=False):
+            batch_size=200, verbose=False, test_W_division_rate = 1.00):
     """
     Train this neural network using stochastic gradient descent.
 
@@ -199,8 +199,8 @@ class TwoLayerNet(object):
       self.params['W2'] -= learning_rate * grads['W2']
       self.params['b2'] -= learning_rate * grads['b2']
     
-      self.W1_test = 0.999 * self.W1_test + 0.001 * self.params['W1']
-      self.W2_test = 0.999 * self.W2_test + 0.001 * self.params['W2']
+      self.W1_test = (1 - test_W_division_rate) * self.W1_test + (test_W_division_rate) * self.params['W1'] # test_W_division_rate = 1 이면 W1_test = W1
+      self.W2_test = (1 - test_W_division_rate) * self.W2_test + (test_W_division_rate) * self.params['W2']
       #########################################################################
       #                             END OF YOUR CODE                          #
       #########################################################################
