@@ -1,2 +1,9 @@
 [A1]
-gradient descent optimization -> gradient descent는 비탈길로 공이 굴러가는 것과 같다. 공은 굴러가다 minimum에서 멈출 것이다. 그러나 이것이 local min 인지 grobal min 인지는 알기 힘들다. momentum update and nestrov's update 가 이 문제점을 어느 정도 해결해줄 수 있다. 가속도를 부여하여 local min (작은 웅덩이) 정도는 탈출할 수 있게끔하는 것이다. 이 아이디어를 좀 더 확장시켜보자. 어떻게 하면 작은 웅덩이를 쉽게 빠져나갈 수 있을까. 직관적으로, (공기저항을 무시할 때) 경사가 가파르거나(속력이 빠르다) 웅덩이가 작거나 공이 클수록 관성에 의해 쉽게 빠져나갈 것이다. 경사나 웅덩이의 크기는 우리가 결정할 수 없는 요소이니 사고에서 제외하자. 공이 크다는 것은 어떤 의미일까? 어떻게 이 사실을 gradient descent optimization 에 이용할 수 있을까?
+gradient descent optimization -> gradient descent는 비탈길로 공이 굴러가는 것과 같다. 
+공은 굴러가다 minimum에서 멈출 것이다. 그러나 이것이 local min 인지 grobal min 인지는 알기 힘들다. 
+momentum update and nestrov's update 가 이 문제점을 어느 정도 해결해줄 수 있다. 
+가속도를 부여하여 local min (작은 웅덩이) 정도는 탈출할 수 있게끔하는 것이다. 
+이 아이디어를 좀 더 확장시켜보자. 어떻게 하면 작은 웅덩이를 쉽게 빠져나갈 수 있을까. 
+직관적으로, (공기저항을 무시할 때) 경사가 가파르거나(속력이 빠르다) 웅덩이가 작거나 공이 클수록 관성에 의해 쉽게 빠져나갈 것이다. 
+경사나 웅덩이의 크기는 우리가 결정할 수 없는 요소이니 사고에서 제외하자. 
+공이 크다는 것은 어떤 의미일까? 어떻게 이 사실을 gradient descent optimization 에 이용할 수 있을까?
